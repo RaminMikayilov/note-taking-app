@@ -20,7 +20,7 @@ const NoteForm = ({
 }: NoteFormProps) => {
   const titleRef = useRef<HTMLInputElement>(null);
   const markdownRef = useRef<HTMLTextAreaElement>(null);
-  const { addTag } = useNoteContext();
+  const { addTag, tags: availableTags } = useNoteContext();
   const [tags, setTags] = useState<Tag[]>(initialTags);
   const navigate = useNavigate();
 
@@ -56,7 +56,7 @@ const NoteForm = ({
               <Creatable
                 isMulti
                 value={tags.map((tag) => ({ value: tag.id, label: tag.label }))}
-                options={tags.map((tag) => ({
+                options={availableTags.map((tag) => ({
                   value: tag.id,
                   label: tag.label,
                 }))}
