@@ -1,11 +1,11 @@
 export type NoteItem = {
-  id: number;
+  id: string;
   title: string;
   tags: Tag[];
   markdown: string;
 };
 
 export type Tag = {
-  id: number;
+  id: string;
   label: string;
 };

@@ -1,23 +1,28 @@
-import { FormEvent, useRef } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { Button, Col, Form, Row, Stack } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Creatable from "react-select/creatable";
 import { useNoteContext } from "../context/useNoteContext";
+import { Tag } from "../types/note.type";
 
 const NoteForm = () => {
   const titleRef = useRef<HTMLInputElement>(null);
   const markdownRef = useRef<HTMLTextAreaElement>(null);
-  const { addNote } = useNoteContext();
+  const { addNote, addTag } = useNoteContext();
+  const [tags, setTags] = useState<Tag[]>([]);
+  const navigate = useNavigate();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
     addNote({
-      id: Date.now(),
+      id: crypto.randomUUID(),
       title: titleRef.current!.value,
       markdown: markdownRef.current!.value,
-      tags: [],
+      tags,
     });
+
+    navigate("/");
   };
 
   return (
@@ -33,7 +38,27 @@ const NoteForm = () => {
           <Col>
             <Form.Group controlId="tags">
               <Form.Label>Tags</Form.Label>
-              <Creatable isMulti />
+              <Creatable
+                isMulti
+                value={tags.map((tag) => ({ value: tag.id, label: tag.label }))}
+                options={tags.map((tag) => ({
+                  value: tag.id,
+                  label: tag.label,
+                }))}
+                onChange={(tags) =>
+                  setTags(
+                    tags.map((tag) => ({
+                      id: tag.value,
+                      label: tag.label,
+                    }))
+                  )
+                }
+                onCreateOption={(label) => {
+                  const newTag = { id: crypto.randomUUID(), label };
+                  addTag(newTag);
+                  setTags((prev) => [...prev, newTag]);
+                }}
+              />
             </Form.Group>
           </Col>
         </Row>
