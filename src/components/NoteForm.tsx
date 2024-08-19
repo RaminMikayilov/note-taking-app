@@ -2,15 +2,22 @@ import { FormEvent, useRef } from "react";
 import { Button, Col, Form, Row, Stack } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Creatable from "react-select/creatable";
+import { useNoteContext } from "../context/useNoteContext";
 
 const NoteForm = () => {
   const titleRef = useRef<HTMLInputElement>(null);
   const markdownRef = useRef<HTMLTextAreaElement>(null);
+  const { addNote } = useNoteContext();
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    console.log(titleRef.current);
-    console.log(markdownRef.current);
+    addNote({
+      id: Date.now(),
+      title: titleRef.current!.value,
+      markdown: markdownRef.current!.value,
+      tags: [],
+    });
   };
 
   return (
