@@ -8,7 +8,7 @@ type NoteProviderProps = {
 
 type NoteContext = {
   noteItems: NoteItem[];
-  addNote: (data: NoteItem) => void;
+  addNote: (data: NoteItemWithoutId) => void;
   updateNote: (id: string, data: NoteItemWithoutId) => void;
   deleteNote: (id: string) => void;
   tags: Tag[];
