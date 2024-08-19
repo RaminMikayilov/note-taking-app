@@ -5,6 +5,8 @@ export type NoteItem = {
   markdown: string;
 };
 
+export type NoteItemWithoutId = Omit<NoteItem, "id">;
+
 export type Tag = {
   id: string;
   label: string;

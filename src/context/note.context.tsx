@@ -1,5 +1,5 @@
 import { createContext, ReactNode } from "react";
-import { NoteItem, Tag } from "../types/note.type";
+import { NoteItem, NoteItemWithoutId, Tag } from "../types/note.type";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
 type NoteProviderProps = {
@@ -9,6 +9,7 @@ type NoteProviderProps = {
 type NoteContext = {
   noteItems: NoteItem[];
   addNote: (data: NoteItem) => void;
+  updateNote: (id: string, data: NoteItemWithoutId) => void;
   tags: Tag[];
   addTag: (data: Tag) => void;
 };
@@ -19,8 +20,14 @@ export function NoteProvider({ children }: NoteProviderProps) {
   const [noteItems, setNoteItems] = useLocalStorage<NoteItem[]>("notes", []);
   const [tags, setTags] = useLocalStorage<Tag[]>("tags", []);
 
-  function addNote(data: NoteItem) {
-    setNoteItems((prev) => [...prev, data]);
+  function addNote(data: NoteItemWithoutId) {
+    setNoteItems((prev) => [...prev, { ...data, id: crypto.randomUUID() }]);
+  }
+
+  function updateNote(id: string, data: NoteItemWithoutId) {
+    setNoteItems((prev) =>
+      prev.map((note) => (note.id === id ? { ...note, ...data } : note))
+    );
   }
 
   function addTag(data: Tag) {
@@ -32,6 +39,7 @@ export function NoteProvider({ children }: NoteProviderProps) {
       value={{
         noteItems,
         addNote,
+        updateNote,
         tags,
         addTag,
       }}
