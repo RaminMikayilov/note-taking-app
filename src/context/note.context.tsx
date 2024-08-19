@@ -10,6 +10,7 @@ type NoteContext = {
   noteItems: NoteItem[];
   addNote: (data: NoteItem) => void;
   updateNote: (id: string, data: NoteItemWithoutId) => void;
+  deleteNote: (id: string) => void;
   tags: Tag[];
   addTag: (data: Tag) => void;
 };
@@ -30,6 +31,10 @@ export function NoteProvider({ children }: NoteProviderProps) {
     );
   }
 
+  function deleteNote(id: string) {
+    setNoteItems((prev) => prev.filter((note) => note.id !== id));
+  }
+
   function addTag(data: Tag) {
     setTags((prev) => [...prev, data]);
   }
@@ -40,6 +45,7 @@ export function NoteProvider({ children }: NoteProviderProps) {
         noteItems,
         addNote,
         updateNote,
+        deleteNote,
         tags,
         addTag,
       }}

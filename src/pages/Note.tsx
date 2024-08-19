@@ -1,10 +1,12 @@
 import { Badge, Button, Col, Row, Stack } from "react-bootstrap";
 import { useNote } from "./note-layout/hooks/useNote";
 import { Link, useNavigate } from "react-router-dom";
+import { useNoteContext } from "../context/useNoteContext";
 
 const Note = () => {
   const note = useNote();
   const navigate = useNavigate();
+  const { deleteNote } = useNoteContext();
 
   return (
     <>
@@ -28,7 +30,7 @@ const Note = () => {
             </Link>
             <Button
               onClick={() => {
-                // onDelete(note.id);
+                deleteNote(note.id);
                 navigate("/");
               }}
               variant="outline-danger"
