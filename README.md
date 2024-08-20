@@ -1,50 +1,40 @@
-# React + TypeScript + Vite
+# Note Taking App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This is a simple and efficient note-taking application built with React, TypeScript, and Bootstrap. It allows users to create, edit, and manage their notes effortlessly. The app is designed with a focus on simplicity and usability, making it easy to organize your thoughts and ideas.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Create Notes**: Easily add new notes with a user-friendly interface.
+- **Edit Notes**: Modify your notes as needed.
+- **Delete Notes**: Remove notes that are no longer needed.
+- **Tags**: Organize your notes with tags for easy filtering and searching.
+- **Responsive Design**: The app is fully responsive, providing a seamless experience on both desktop and mobile devices.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Tech Stack
 
-- Configure the top-level `parserOptions` property like this:
+- **React**: A popular JavaScript library for building user interfaces.
+- **TypeScript**: A typed superset of JavaScript that helps catch errors early and improve code quality.
+- **Bootstrap**: A powerful front-end framework for creating responsive and mobile-first websites.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## Installation
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+To get started with this project, follow these steps:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+1. Clone this repository to your local machine using git clone https://github.com/RaminMikayilov/note-taking-app.git
+2. Navigate to the project directory using cd note-taking-app
+3. Install the necessary dependencies using npm install
+4. Start the development server using npm run dev(because I use vite react)
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+The app should now be running on localhost
+
+## Contributing
+
+If you find any bugs, please feel free to create an issue or submit a pull request.
+
+If you would like to contribute to the project, please fork the repository and create a pull request.
+
+## License
+
+This project is licensed under the MIT License - [MIT](https://choosealicense.com/licenses/mit/)
