@@ -17,25 +17,29 @@ const EditTagsModal = ({ isOpen, onClose }: EditTagsModalProps) => {
       <Modal.Body>
         <Form>
           <Stack gap={2}>
-            {tags.map((tag) => (
-              <Row key={tag.id}>
-                <Col>
-                  <Form.Control
-                    type="text"
-                    value={tag.label}
-                    onChange={(e) => updateTag(tag.id, e.target.value)}
-                  />
-                </Col>
-                <Col xs="auto">
-                  <Button
-                    onClick={() => deleteTag(tag.id)}
-                    variant="outline-danger"
-                  >
-                    &times;
-                  </Button>
-                </Col>
-              </Row>
-            ))}
+            {tags.length > 0 ? (
+              tags.map((tag) => (
+                <Row key={tag.id}>
+                  <Col>
+                    <Form.Control
+                      type="text"
+                      value={tag.label}
+                      onChange={(e) => updateTag(tag.id, e.target.value)}
+                    />
+                  </Col>
+                  <Col xs="auto">
+                    <Button
+                      onClick={() => deleteTag(tag.id)}
+                      variant="outline-danger"
+                    >
+                      &times;
+                    </Button>
+                  </Col>
+                </Row>
+              ))
+            ) : (
+              <p>No tags available. Add some tags to start editing.</p>
+            )}
           </Stack>
         </Form>
       </Modal.Body>
