@@ -45,10 +45,24 @@ export function NoteProvider({ children }: NoteProviderProps) {
     setTags((prev) =>
       prev.map((tag) => (tag.id === id ? { ...tag, label } : tag))
     );
+
+    setNoteItems((prev) =>
+      prev.map((note) => ({
+        ...note,
+        tags: note.tags.map((tag) => (tag.id === id ? { ...tag, label } : tag)),
+      }))
+    );
   }
 
   function deleteTag(id: string) {
     setTags((prev) => prev.filter((tag) => tag.id !== id));
+
+    setNoteItems((prev) =>
+      prev.map((note) => ({
+        ...note,
+        tags: note.tags.filter((tag) => tag.id !== id),
+      }))
+    );
   }
 
   return (
