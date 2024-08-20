@@ -5,11 +5,13 @@ import ReactSelect from "react-select";
 import NoteCard from "../components/note-card/NoteCard";
 import { useMemo, useState } from "react";
 import { Tag } from "../types/note.type";
+import EditTagsModal from "../components/EditTagsModal";
 
 const NoteList = () => {
   const { noteItems, tags } = useNoteContext();
   const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
   const [title, setTitle] = useState("");
+  const [editTagsModalIsOpen, setEditTagsModalIsOpen] = useState(false);
 
   const filteredNotes = useMemo(() => {
     return noteItems.filter(
@@ -35,7 +37,7 @@ const NoteList = () => {
               <Button variant="primary">Create</Button>
             </Link>
             <Button
-              //   onClick={() => setEditTagsModalIsOpen(true)}
+              onClick={() => setEditTagsModalIsOpen(true)}
               variant="outline-secondary"
             >
               Edit Tags
@@ -85,6 +87,11 @@ const NoteList = () => {
           </Col>
         ))}
       </Row>
+
+      <EditTagsModal
+        isOpen={editTagsModalIsOpen}
+        onClose={() => setEditTagsModalIsOpen(false)}
+      />
     </>
   );
 };

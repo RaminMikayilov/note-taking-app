@@ -13,6 +13,8 @@ type NoteContext = {
   deleteNote: (id: string) => void;
   tags: Tag[];
   addTag: (data: Tag) => void;
+  updateTag: (id: string, label: string) => void;
+  deleteTag: (id: string) => void;
 };
 
 export const NoteContext = createContext({} as NoteContext);
@@ -39,6 +41,16 @@ export function NoteProvider({ children }: NoteProviderProps) {
     setTags((prev) => [...prev, data]);
   }
 
+  function updateTag(id: string, label: string) {
+    setTags((prev) =>
+      prev.map((tag) => (tag.id === id ? { ...tag, label } : tag))
+    );
+  }
+
+  function deleteTag(id: string) {
+    setTags((prev) => prev.filter((tag) => tag.id !== id));
+  }
+
   return (
     <NoteContext.Provider
       value={{
@@ -48,6 +60,8 @@ export function NoteProvider({ children }: NoteProviderProps) {
         deleteNote,
         tags,
         addTag,
+        updateTag,
+        deleteTag,
       }}
     >
       {children}
